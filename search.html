@@ -1,0 +1,51 @@
+{% extends "frontend/base.html" %}
+{% block content %}
+
+
+
+<h1>Hello from Search</h1>
+
+
+<form class="form-inline mt-2 mt-md-0" action="{% url 'search_result' %}"
+method="get">
+<input name="q" class="form-control mr-sm-2" type="text" placeholder="Search"
+aria-label="Search" >
+</form>
+
+{% for consumer in consumer_list %}
+
+<div class='mb-5 mt-5'>
+    <p>CIN: <span id="txt1">{{ consumer.username }}</span></p>
+    <p>Phone Number: <span id="txt2">{{ consumer.country.callingCodes }}{{ consumer.phone }}</span></p>
+    <p>Consumer Name: <span id="txt3">{{ consumer.user_full_name }}</span> </p>
+    <input type="button" value="Select" onclick="passvalues()" />
+</div>
+
+{% endfor %}
+
+
+{% endblock content %}
+
+{% block scripts %} 
+<script>
+	function passvalues()
+	{
+        var x1=document.getElementById('txt1').innerText;
+        var x2=document.getElementById('txt2').innerText;
+        var x3=document.getElementById('txt3').innerText;
+        var aaa = {
+            "CIN": x1,
+            "Phone": x2,
+            "Name": x3,
+            };
+        localStorage.setItem("textvalue", JSON.stringify(aaa));
+		window.location.href="{% url 'DirectComissionCreatePage' %}";
+		return false;
+	}
+
+
+</script>
+
+{% endblock  %}
+
+

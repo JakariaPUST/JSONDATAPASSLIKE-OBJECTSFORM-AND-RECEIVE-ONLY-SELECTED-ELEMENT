@@ -1,0 +1,58 @@
+{% extends "frontend/base.html" %}
+{% block content %}
+
+
+<form action="." method="POST" class="mt-5">
+    
+    {% csrf_token %}
+    {{ form.as_p }}
+    <center>
+	<h1>Value Received: </h1>
+	<p id="result"></p>
+	<p id="result2"></p>
+
+
+
+
+<script>
+		{% comment %} document.getElementById("result").innerHTML=localStorage.getItem("textvalue"); {% endcomment %}
+		{% comment %} document.getElementById("result2").innerHTML=localStorage.getItem("textvalue"); {% endcomment %}
+        var dj = JSON.parse(localStorage.getItem("textvalue"));
+        {% comment %} console.log('jsonstring', dj); {% endcomment %}
+
+        jsoncin = dj["CIN"];
+        jsonname = dj["Name"];
+        jsonphone = dj["Phone"];
+
+        console.log('json_CIN', jsoncin);
+        console.log('jsonname', jsonname);
+        console.log('jsonphone', jsonphone);
+
+
+
+		{% comment %} document.getElementById("result2").innerHTML=localStorage.getItem("textvalue"); {% endcomment %}
+		{% comment %} document.getElementById("id_ReceiverName").innerHTML=xd; {% endcomment %}
+        {% comment %} var val = localStorage.getItem('textvalue');  
+        console.log('taskName: ', JSON.parse(val)); {% endcomment %}
+
+</script>
+
+
+    
+    <script>
+        var ReceiverName = jsonname;
+        document.getElementById("id_ReceiverName").value = ReceiverName;
+        var ReceiverCIN = jsoncin;
+        document.getElementById("id_ReceiverCIN").value = ReceiverCIN;
+        var ReceiverPhoneNo = jsonphone;
+        document.getElementById("id_ReceiverPhoneNo").value = ReceiverPhoneNo;
+
+    </script>
+    
+    <input type="submit" value="Save"/>
+
+
+
+</form>
+  
+{% endblock content %}
